@@ -10,6 +10,8 @@
  * yarn add typeorm
  * yarn add reflect-metadata
  * yarn add sqlite3
+ * yarn add uuid
+ * yarn add @types/uuid
  */
 
 // TIPOS DE REQUISIÇÕES
