@@ -6,7 +6,7 @@
   "author": "LuigiBelanda <luigi.belanda.milani@gmail.com>",
   "license": "MIT",
 
-  "scripts": { 
+  "scripts": {
     "dev": "ts-node-dev src/server.ts"
   },
   
@@ -16,6 +16,9 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.2",
+    "typeorm": "^0.2.45"
   }
 }
