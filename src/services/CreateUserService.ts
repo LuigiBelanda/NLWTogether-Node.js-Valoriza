@@ -1,3 +1,4 @@
+import { getCustomRepository } from "typeorm";
 import { UserRepositories } from "../repositories/UserRepositories";
 
 interface IUserRequest {
@@ -10,7 +11,9 @@ class CreateUserService {
   // aqui fazemos um desestruturação dos dados que chegam como base na interface acima
   async execute({ name, email, admin }: IUserRequest) {
     // instanciando a classe do nosso repo UserRepositories que ja tem algumas funções prontas
-    const usersRepository = new UserRepositories();
+    // por usarmos nesta classe um repo do proprio typeorm temos que chamar a função getCustomRpository
+    // ja que estamos de certa forma modificando ele, passamos como parâmetro nossa classe normalmente
+    const usersRepository = getCustomRepository(UserRepositories);
 
     // verificamos se o campo email veio com algo
     if (!email) {

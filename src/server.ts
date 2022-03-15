@@ -36,12 +36,18 @@
 
 import express from "express";
 import "reflect-metadata";
+import { router } from "./routes";
 
 // importando o arquivo index da pasta abaixo
-import "./database"
+import "./database";
 
 // yarn add @types/express
 const app = express();
+
+app.use(express.json());
+
+// inserindo as rotas do arquivos routes.ts no projeto
+app.use(router);
 
 // ROTAS DE TESTE
 app.get("/test", (req, res) => {
