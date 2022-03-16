@@ -10,4 +10,5 @@ createConnection();
  * yarn typeorm migration:run (roda as migrations)
  * yarn typeorm migration:revert (reverte a última migration rodada)
  * yarn typeorm entity:create -n User (criando entidade User)
+ * yarn typeorm migration:create -n CreateTags (Criando migration de Tags)
  */

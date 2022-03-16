@@ -34,7 +34,8 @@
  *                  }
  */
 
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
+import "express-async-errors"; // com esse módulo conseguimos tratar erros com express / async
 import "reflect-metadata";
 import { router } from "./routes";
 
@@ -49,13 +50,21 @@ app.use(express.json());
 // inserindo as rotas do arquivos routes.ts no projeto
 app.use(router);
 
-// ROTAS DE TESTE
-app.get("/test", (req, res) => {
-  return res.send("Olá, rota test GET");
-});
+// midlleware - tratando erros
+// sempre que usarmos o throw new Error ele virá aqui
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  // aqui vemos se o que estamos recebendo é uma instância do throw new error
+  if (err instanceof Error) {
+    return res.status(400).json({
+      error: err.message,
+    });
+  }
 
-app.post("/test-post", (req, res) => {
-  return res.send("Olá, rota test POST");
+  // caso não for retornamos esse tipo de erro
+  return res.status(500).json({
+    status: "error",
+    message: "Internal server error",
+  });
 });
 
 // http://localhost:3000
