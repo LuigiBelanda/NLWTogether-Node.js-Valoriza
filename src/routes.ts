@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CreateTagController } from "./controllers/CreateTagController";
 import { CreateUserController } from "./controllers/CreateUserController";
+import { ensureAdmin } from "./middlewares/ensuraAdmin";
 
 const router = Router();
 
@@ -17,6 +18,7 @@ router.post("/test-post", (req, res) => {
 });
 
 router.post("/users", createUserController.handle);
-router.post("/tags", createTagController.handle);
+// ensureAdmin = middleware / cerateTagController = controller
+router.post("/tags", ensureAdmin, createTagController.handle);
 
 export { router };
