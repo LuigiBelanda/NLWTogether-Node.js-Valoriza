@@ -11,7 +11,8 @@ interface IUserRequest {
 
 class CreateUserService {
   // aqui fazemos um desestruturação dos dados que chegam como base na interface acima
-  async execute({ name, email, admin, password }: IUserRequest) {
+  // se não vier nada na prop admin ela será false
+  async execute({ name, email, admin = false, password }: IUserRequest) {
     // instanciando a classe do nosso repo UserRepositories que ja tem algumas funções prontas
     // por usarmos nesta classe um repo do proprio typeorm temos que chamar a função getCustomRpository
     // ja que estamos de certa forma modificando ele, passamos como parâmetro nossa classe normalmente
