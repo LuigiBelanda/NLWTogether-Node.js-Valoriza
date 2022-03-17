@@ -1,15 +1,17 @@
 import { getCustomRepository } from "typeorm";
 import { UserRepositories } from "../repositories/UserRepositories";
+import { hash } from "bcryptjs";
 
 interface IUserRequest {
   name: string;
   email: string;
   admin?: boolean;
+  password: string;
 }
 
 class CreateUserService {
   // aqui fazemos um desestruturação dos dados que chegam como base na interface acima
-  async execute({ name, email, admin }: IUserRequest) {
+  async execute({ name, email, admin, password }: IUserRequest) {
     // instanciando a classe do nosso repo UserRepositories que ja tem algumas funções prontas
     // por usarmos nesta classe um repo do proprio typeorm temos que chamar a função getCustomRpository
     // ja que estamos de certa forma modificando ele, passamos como parâmetro nossa classe normalmente
@@ -30,11 +32,15 @@ class CreateUserService {
       throw new Error("User already exists");
     }
 
+    const passwordHash = await hash(password, 8);
+
     // passando os dados para criar o user
     const user = usersRepository.create({
       name,
       email,
       admin,
+      // aqui passamos o nome do campo + a var que vai ocupar ele, isso serve para quando o campo no BD não tem o mesmo nome que a var
+      password: passwordHash,
     });
 
     // salvando o user que queremos criar

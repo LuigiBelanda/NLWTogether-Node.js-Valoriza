@@ -23,13 +23,16 @@ class User {
   @Column()
   admin: boolean;
 
+  @Column()
+  password: string;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 
-  // verificamos se o id já existe, se não criamos um 
+  // verificamos se o id já existe, se não criamos um
   constructor() {
     if (!this.id) {
       this.id = uuid();
