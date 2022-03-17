@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
 import { CreateTagController } from "./controllers/CreateTagController";
 import { CreateUserController } from "./controllers/CreateUserController";
 import { ensureAdmin } from "./middlewares/ensuraAdmin";
@@ -7,6 +8,7 @@ const router = Router();
 
 const createUserController = new CreateUserController();
 const createTagController = new CreateTagController();
+const authenticateUserController = new AuthenticateUserController();
 
 // ROTAS DE TESTE
 router.get("/test", (req, res) => {
@@ -20,5 +22,6 @@ router.post("/test-post", (req, res) => {
 router.post("/users", createUserController.handle);
 // ensureAdmin = middleware / cerateTagController = controller
 router.post("/tags", ensureAdmin, createTagController.handle);
+router.post("/login", authenticateUserController.handle)
 
 export { router };
