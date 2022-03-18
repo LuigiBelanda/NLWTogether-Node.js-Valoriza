@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 // aqui eu digo que quero usar o modo de uuid v4, mas quero chama-lo como uuid
 import { v4 as uuid } from "uuid";
+import { Exclude } from "class-transformer";
 
 // @Entity("nome_da_tabela")
 @Entity("users")
@@ -23,6 +24,8 @@ class User {
   @Column()
   admin: boolean;
 
+  // com o @Exclude tiramos esse campo quando formos buscar as informações dos users
+  @Exclude()
   @Column()
   password: string;
 

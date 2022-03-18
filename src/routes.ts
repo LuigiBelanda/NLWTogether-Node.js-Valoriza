@@ -5,6 +5,7 @@ import { CreateTagController } from "./controllers/CreateTagController";
 import { CreateUserController } from "./controllers/CreateUserController";
 import { ListTagsController } from "./controllers/ListTagsController";
 import { ListUserReceiveComplimentsController } from "./controllers/ListUserReceiveComplimentsController";
+import { ListUsersController } from "./controllers/ListUsersController";
 import { ListUserSendComplimentsController } from "./controllers/ListUserSendComplimentsController";
 import { ensureAdmin } from "./middlewares/ensureAdmin";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
@@ -18,6 +19,7 @@ const createComplimentController = new CreateComplimentController();
 const listUserSendComplimentsController = new ListUserSendComplimentsController();
 const listUserReceiveComplimentsController = new ListUserReceiveComplimentsController();
 const listTagsController = new ListTagsController();
+const listUsersController = new ListUsersController();
 
 // ROTAS DE TESTE
 router.get("/test", (req, res) => {
@@ -29,6 +31,8 @@ router.post("/test-post", (req, res) => {
 });
 
 router.post("/users", createUserController.handle);
+
+router.get("/users", ensureAuthenticated, listUsersController.handle);
 
 // ensureAdmin = middleware / cerateTagController = controller
 router.post(
